@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>电子时间表</title>
+</head>
+<style>
+	.time{
+		width: 300px;
+		height: 60px;
+		border: 1px solid red;
+		margin: 0 auto;
+		text-align: center;
+		line-height: 60px;
+	}
+	#h,#m,#s{
+		color: aqua;
+	}
+	.Clock{
+		width: 300px;
+		height: 300px;
+		border-radius: 50%;
+		margin:100px auto  0;
+		border:2px solid red;
+		position: relative;
+		background: url(img/time.jpg) no-repeat -2px -1px;
+		background-size: 303px 303px;
+
+
+	}
+	.Second{
+       width: 3px;
+       height: 120px;
+       background-color: #000;
+       border-radius: 5px;
+       position: absolute;
+       top:30px;
+       left: 0;
+       right: 0;
+       margin-right: auto;
+       margin-left: auto;
+       z-index: 100;
+       transform-origin:center bottom;
+       transform:rotate(90deg);
+      
+	}
+	.Minute{
+           width:4px;
+           height:80px;
+           background-color: #E0DBD3;
+           position:absolute;
+           border-radius: 4px;
+           top:70px;
+	       left: 0;
+	       right: 0;
+	       margin-right: auto;
+	       margin-left: auto;
+	       z-index: 50;
+	       transform-origin:center bottom;
+	       transform:rotate(60deg);
+         	}
+	.time1{
+		   width:3px;
+           height:50px;
+           background-color: #FF745F;
+           position:absolute;
+           border-radius: 3px;
+           top: 100px;
+	       left: 0;
+	       right: 0;
+	       margin-right: auto;
+	       margin-left: auto;
+	       z-index: 20;
+	       transform-origin:center bottom;
+	       transform:rotate(30deg);
+	}
+</style>
+<body>
+	<div class="time">
+		<span id="h">17</span> 时
+		<span id="m">40</span> 分
+		<span id="s">03</span> 秒
+	</div>
+	<div class="Clock">
+		<div class="Minute"></div>
+		<div class="Second"></div>
+		<div class="time1"></div>
+	</div>
+</body>
+</html>
+<script>	
+    let h=document.querySelector("#h")
+    let m=document.querySelector("#m")
+    let s=document.querySelector("#s")
+    
+function fn(){
+	let now =new Date;
+	let h1=now.getHours();
+	let m1=now.getMinutes();
+	var s1=now.getSeconds();
+	h.innerHTML=h1;
+	m.innerHTML=m1;
+	s.innerHTML=s1;
+}
+setInterval(fn,1000);
+    // 时钟
+    let Minute=document.querySelector(".Minute");
+    let time1=document.querySelector(".time1");
+    let Second=document.querySelector(".Second");
+    // console.log(Minute,time1,Second);
+    function fn1(){
+    	let now1 =new Date;
+	    let h2=now1.getHours();
+	    let m2=now1.getMinutes();
+	    let s2=now1.getSeconds();
+    	Second.style=`transform:rotate(${s2*6}deg)`;
+    	Minute.style=`transform:rotate(${m2*6+((s2*6)/60)}deg)`;
+    	time1.style=`transform:rotate(${h2*30+((m2*6)/15)}deg)`;
+console.log(s2*6,m2*6+((s2*6)/60),h2*30+((m2*6)/15))
+    }
+    setInterval(fn1,1000);
+</script>
